@@ -20,5 +20,5 @@ If you find this code useful in your research, please cite the paper as follows:
   author = {Sujai Hiremath and Jacqueline R. M. A. Maasch and Mengxiao Gao and Promit Ghosal and Kyra Gan},
   booktitle = {The Thirty-eighth Annual Conference on Neural Information Processing Systems},
   year = {2024},
-  url = {https://openreview.net/forum?id=xnmm1jThkv](https://arxiv.org/pdf/2405.14496)}
+  url = {https://arxiv.org/pdf/2405.14496}
 }
