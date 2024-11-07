@@ -1,4 +1,5 @@
-# Hybrid Top-Down Global Causal Discovery
+# Hybrid Top-Down Global Causal Discovery with Local Search 
+for Linear and Nonlinear Additive Noise Models
 
 This repository provides code for the methods **LHTS**, **NHTS**, and **ED** developed in the paper:
 
