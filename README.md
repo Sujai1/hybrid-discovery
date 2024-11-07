@@ -5,6 +5,7 @@ The paper can be found here: https://arxiv.org/pdf/2405.14496.
 
 
 Citation information:
+
 @inproceedings{
 hiremath2024hybrid,
 title={Hybrid Top-Down Global Causal Discovery with Local Search for Linear and Nonlinear Additive Noise Models},
