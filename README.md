@@ -10,9 +10,9 @@ The repository also includes the data-generation process used in the experiments
 
 ---
 
-## Citation
+## Reference
 
-If you find this code useful in your research, please cite the paper as follows:
+If you find this paper/code useful in your research, we kindly ask you cite the paper as follows:
 
 ```bibtex
 @inproceedings{hiremath2024hybrid,
