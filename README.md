@@ -1,16 +1,10 @@
-# Hybrid Top-Down Global Causal Discovery with Local Search for Linear and Nonlinear Additive Noise Models
-
-This repository provides code for the methods **LHTS**, **NHTS**, and **ED** developed in the paper:
+This repository provides code for the methods **LHTS**, **NHTS**, and **ED** and experimental setup developed in the paper:
 
 > [Hybrid Top-Down Global Causal Discovery with Local Search for Linear and Nonlinear Additive Noise Models](https://arxiv.org/pdf/2405.14496)  
 > **Authors:** Sujai Hiremath, Jacqueline R. M. A. Maasch, Mengxiao Gao, Promit Ghosal, and Kyra Gan  
 > **Conference:** The Thirty-eighth Annual Conference on Neural Information Processing Systems (NeurIPS 2024)
 
-The repository also includes the data-generation process used in the experiments presented in the paper.
-
 ---
-
-## Reference
 
 If you find this paper/code useful in your research, we kindly ask you cite the paper as follows:
 
