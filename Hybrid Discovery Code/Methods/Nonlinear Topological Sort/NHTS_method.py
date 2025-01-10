@@ -44,17 +44,6 @@ def get_Pij(i, j, ind, features, d):
                 Pij.append(features[k])
     return np.array(Pij).T
 
-def check_PP2(i, PRS, d):
-    '''Checks whether PP2 criterion holds for i: i must be identified in PP2 relation with at least one j to be a root, and if a j is in PP2 relation with i,
-    i cannot be a root.'''
-    pot_root = True
-    for j in range(d):
-        if j!=i:
-            if (j,i) in PRS and PRS[(j,i)] == 'PP2':
-                pot_root = False
-    return pot_root
-
-
 def hierarchical_topological_sort(features, ind):
     d = len(features)
     PRS = {}
@@ -90,22 +79,21 @@ def hierarchical_topological_sort(features, ind):
     for i in range(d):
         if i in PRS and PRS[i] == 'Isolated':
             continue
+        
 
         dependents = [features[k] for k in range(d) if k != i and (i, k) in PRS and PRS[(i, k)] != 'PP2']
         flag = True
         for xk in dependents:
-            if all(check_conditional_independence(features[j], xk, features[i], thresh=0.05) for j in range(d) if (i, j) in PRS and PRS[(i, j)] == 'PP2'):
+            if all(check_conditional_independence(features[j], xk, features[i], thresh=0.5) for j in range(d) if (i, j) in PRS and PRS[(i, j)] == 'PP2'):
                 flag = False
                 # If the above condition holds, i cannot be a root, so we stop immediately
                 break
         if flag == True:
             pi_H[i] = 1
-        
     roots = [i for i in range(d) if i in pi_H and pi_H[i] == 1]
-
     return roots
 
-def marg_dep(data, alpha=0.01):
+def marg_dep(data, alpha=0.05):
     d = data.shape[1]
     ind_collection = [[] for _ in range(d)]
     for i in range(d):
@@ -115,7 +103,7 @@ def marg_dep(data, alpha=0.01):
                 ind_collection[j].append(i)
     return ind_collection
 
-def nonlinear_sort(sorted_list, unsorted_list, ind, data):
+def nonlinear_sort_new(sorted_list, unsorted_list, ind, data):
     while unsorted_list:
         measures = np.full(data.shape[1], np.inf)
         for x in unsorted_list:
@@ -134,8 +122,7 @@ def nonlinear_sort(sorted_list, unsorted_list, ind, data):
             for y in features:
                 mi = ee.mi(data[:, y], residuals)
                 mi_values.append(max(0, mi))
- 
-            # Use a cutoff to decide if x in next layer, for comparison to linear sort (yields a linear sort not nonlinear sort)
+            # Use a cutoff to decide if x in next layer
             if all(mi_values[j] < 0.05 for j in range(0,len(features))):
                 measures[x] = 0
             #Else, use avg to ensure at least one vertex gets selected
@@ -155,7 +142,6 @@ def nonlinear_sort(sorted_list, unsorted_list, ind, data):
         unsorted_list.remove(min_index)
     return sorted_list
 
-
 def NHTS(data):
     """
     Nonlinear Hierarchical Topological Sort (NHTS) function.
@@ -164,10 +150,10 @@ def NHTS(data):
     data (np.array): Dataset with d variables as columns and n samples as rows.
     
     Returns:
-    list: Topological ordering of the variables, where if y comes after x, y cannot cause x.
+    list: Topological ordering of the variables.
     """
     ind = marg_dep(data)
     roots = hierarchical_topological_sort(data.T, ind)
     unsorted = [i for i in range(data.shape[1]) if i not in roots]
-    output = nonlinear_sort(roots, unsorted, ind, data)
+    output = nonlinear_sort_new(roots, unsorted, ind, data)
     return output
