@@ -11,7 +11,7 @@ If you find this paper/code useful in your research, we kindly ask you cite the 
 ```bibtex
 @inproceedings{hiremath2024hybrid,
   title = {Hybrid Top-Down Global Causal Discovery with Local Search for Linear and Nonlinear Additive Noise Models},
-  author = {Sujai Hiremath and Jacqueline R. M. A. Maasch and Mengxiao Gao and Promit Ghosal and Kyra Gan},
+  author = {Hiremath, Sujai and Maasch, Jacqueline and Gao, Mengxiao and Ghosal, Promit and Gan, Kyra},
   booktitle = {The Thirty-eighth Annual Conference on Neural Information Processing Systems},
   year = {2024},
   url = {https://arxiv.org/pdf/2405.14496}
