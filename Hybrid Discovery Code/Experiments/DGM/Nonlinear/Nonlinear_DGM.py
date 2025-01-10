@@ -4,6 +4,7 @@ from CausalDisco.analytics import r2_sortability
 
 
 # Data Generation Method
+    
 def generate_quadratic_data(n, d, avg_edges, max_r2_sortability=0.7, max_attempts=100):
     from CausalDisco.analytics import r2_sortability
     
@@ -70,6 +71,8 @@ def generate_quadratic_data(n, d, avg_edges, max_r2_sortability=0.7, max_attempt
         if r2_value <= max_r2_sortability:
             break
         attempt += 1
+       
+    X, adjacency_matrix, topological_order  = permute_data(X, adjacency_matrix, topological_order)
 
     parents_list = [set(np.where(adjacency_matrix[:, node] == 1)[0]) for node in range(d)]
     
@@ -111,5 +114,22 @@ def topological_sort(adjacency_matrix):
         raise ValueError("The graph has cycles or is disconnected.")
 
     return topological_order
+
+def permute_data(X, adjacency_matrix, topological_order):
+    # Generate a random permutation of indices
+    d = adjacency_matrix.shape[0]
+    permutation = np.random.permutation(d)
+
+    # Permute the columns of X
+    X = X[:, permutation]
+
+    # Permute the rows and columns of adjacency_matrix
+    adjacency_matrix = adjacency_matrix[permutation, :][:, permutation]
+
+    # Update the topological_order according to the permutation
+    topological_order = [np.where(permutation == i)[0][0] for i in topological_order]
+
+    return X, adjacency_matrix, topological_order
+
 
    
